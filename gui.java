@@ -1,17 +1,20 @@
 package com.company;
-import org.knowm.xchart.SwingWrapper;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import javax.swing.JFrame;
+import org.knowm.xchart.SwingWrapper;
 
 import static com.company.BarChart01.*;
 
 public class gui extends JFrame {
     public static Thread thread;
     public static JFrame frame2;
+    public static int ilosc_danych=0;
+
+    public boolean sprawdz_czy_sa_dane(){
+        return ilosc_danych>0;
+    }
 
     public void interfejs(){
         setTitle("Szymon Borzdyński 1");
@@ -38,12 +41,12 @@ public class gui extends JFrame {
         frame.add(pole_tekstowe3);
 
         JTextField pole_tekstowe4;
-        pole_tekstowe4 = new JTextField("");
+        pole_tekstowe4 = new JTextField("28");
         pole_tekstowe4.setBounds(1,110, 100,30);
         frame.add(pole_tekstowe4);
 
         JTextField pole_tekstowe5;
-        pole_tekstowe5 = new JTextField("");
+        pole_tekstowe5 = new JTextField("36");
         pole_tekstowe5.setBounds(1,140, 100,30);
         frame.add(pole_tekstowe5);
 
@@ -72,242 +75,197 @@ public class gui extends JFrame {
         pole_tekstowe10.setBounds(1,290, 100,30);
         frame.add(pole_tekstowe10);
 
+
         JCheckBox checkBox1 = new JCheckBox("Check");
         checkBox1.setBounds(100,20, 80,30);
-        checkBox1.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                if(checkBox1.isSelected()){
-                    System.out.println("Selected");
-                    dodaj_liczbe(pole_tekstowe1.getText());
-                    if(frame2 != null){
-                        frame2.revalidate();
-                        frame2.repaint();
-                    }
-                } else{
-                    System.out.println("Not Selected");
-                    usun_liczbe(pole_tekstowe1.getText());
-                    if(frame2 != null){
-                        frame2.revalidate();
-                        frame2.repaint();
-                    }
-
-                }
+        Color[] color1 = new Color[]{new Color(224, 59, 59)};
+        checkBox1.addItemListener(e -> {
+            if(checkBox1.isSelected()){
+                ilosc_danych++;
+                dodaj_liczbe(pole_tekstowe1.getText(),color1);
+            } else{
+                ilosc_danych--;
+                usun_liczbe(pole_tekstowe1.getText());
+            }
+            if(frame2 != null){
+                frame2.revalidate();
+                frame2.repaint();
             }
         });
         frame.add(checkBox1);
 
         JCheckBox checkBox2 = new JCheckBox("Check");
         checkBox2.setBounds(100,50, 80,30);
-        checkBox2.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                if(checkBox2.isSelected()){
-                    System.out.println("Selected");
-                    dodaj_liczbe(pole_tekstowe2.getText());
-                    if(frame2 != null){
-                        frame2.revalidate();
-                        frame2.repaint();
-                    }
-                } else{
-                    System.out.println("Not Selected");
-                    usun_liczbe(pole_tekstowe2.getText());
-                    if(frame2 != null){
-                        frame2.revalidate();
-                        frame2.repaint();
-                    }
+        Color[] color2 = new Color[]{new Color(35, 119, 15)};
+        checkBox2.addItemListener(e -> {
+            if(checkBox2.isSelected()){
+                ilosc_danych++;
+                dodaj_liczbe(pole_tekstowe2.getText(),color2);
+            } else{
+                ilosc_danych--;
+                usun_liczbe(pole_tekstowe2.getText());
 
-                }
+            }
+            if(frame2 != null){
+                frame2.revalidate();
+                frame2.repaint();
             }
         });
         frame.add(checkBox2);
 
         JCheckBox checkBox3 = new JCheckBox("Check");
         checkBox3.setBounds(100,80, 80,30);
-        checkBox3.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                if(checkBox3.isSelected()){
-                    System.out.println("Selected");
-                    dodaj_liczbe(pole_tekstowe3.getText());
-                    if(frame2 != null){
-                        frame2.revalidate();
-                        frame2.repaint();
-                    }
-                } else{
-                    System.out.println("Not Selected");
-                    usun_liczbe(pole_tekstowe3.getText());
-                    if(frame2 != null){
-                        frame2.revalidate();
-                        frame2.repaint();
-                    }
+        Color[] color3 = new Color[]{new Color(150, 147, 18)};
+        checkBox3.addItemListener(e -> {
+            if(e.getStateChange() == ItemEvent.ITEM_STATE_CHANGED){
+                checkBox3.setSelected(false);
+                System.out.println("zmieniona wartosc");
+            }
+            if(checkBox3.isSelected()){
+                ilosc_danych++;
+                dodaj_liczbe(pole_tekstowe3.getText(),color3);
+            } else{
+                ilosc_danych--;
+                usun_liczbe(pole_tekstowe3.getText());
 
-                }
+            }
+            if(frame2 != null){
+                frame2.revalidate();
+                frame2.repaint();
             }
         });
         frame.add(checkBox3);
 
         JCheckBox checkBox4 = new JCheckBox("Check");
         checkBox4.setBounds(100,110, 80,30);
-        checkBox4.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                if(checkBox4.isSelected()){
-                    System.out.println("Selected");
-                    dodaj_liczbe(pole_tekstowe4.getText());
-                    if(frame2 != null){
-                        frame2.revalidate();
-                        frame2.repaint();
-                    }
-                } else{
-                    System.out.println("Not Selected");
-                    usun_liczbe(pole_tekstowe4.getText());
-                    if(frame2 != null){
-                        frame2.revalidate();
-                        frame2.repaint();
-                    }
+        Color[] color4 = new Color[]{new Color(33, 61, 241)};
+        checkBox4.addItemListener(e -> {
+            if(checkBox4.isSelected()){
+                ilosc_danych++;
+                dodaj_liczbe(pole_tekstowe4.getText(),color4);
+            } else{
+                ilosc_danych--;
+                usun_liczbe(pole_tekstowe4.getText());
 
-                }
+            }
+            if(frame2 != null){
+                frame2.revalidate();
+                frame2.repaint();
             }
         });
         frame.add(checkBox4);
 
         JCheckBox checkBox5 = new JCheckBox("Check");
         checkBox5.setBounds(100,140, 80,30);
-        checkBox5.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                if(checkBox5.isSelected()){
-                    System.out.println("Selected");
-                    dodaj_liczbe(pole_tekstowe5.getText());
-                    if(frame2 != null){
-                        frame2.revalidate();
-                        frame2.repaint();
-                    }
-                } else{
-                    System.out.println("Not Selected");
-                    usun_liczbe(pole_tekstowe5.getText());
-                    if(frame2 != null){
-                        frame2.revalidate();
-                        frame2.repaint();
-                    }
+        Color[] color5 = new Color[]{new Color(241, 124, 7)};
+        checkBox5.addItemListener(e -> {
+            if(checkBox5.isSelected()){
+                ilosc_danych++;
+                dodaj_liczbe(pole_tekstowe5.getText(),color5);
+            } else{
+                ilosc_danych--;
+                usun_liczbe(pole_tekstowe5.getText());
 
-                }
+            }
+            if(frame2 != null){
+                frame2.revalidate();
+                frame2.repaint();
             }
         });
         frame.add(checkBox5);
 
         JCheckBox checkBox6 = new JCheckBox("Check");
         checkBox6.setBounds(100,170, 80,30);
-        checkBox6.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                if(checkBox6.isSelected()){
-                    System.out.println("Selected");
-                    dodaj_liczbe(pole_tekstowe6.getText());
-                    if(frame2 != null){
-                        frame2.revalidate();
-                        frame2.repaint();
-                    }
-                } else{
-                    System.out.println("Not Selected");
-                    usun_liczbe(pole_tekstowe6.getText());
-                    if(frame2 != null){
-                        frame2.revalidate();
-                        frame2.repaint();
-                    }
+        Color[] color6 = new Color[]{new Color(91, 0, 105)};
+        checkBox6.addItemListener(e -> {
+            if(checkBox6.isSelected()){
+                ilosc_danych++;
+                dodaj_liczbe(pole_tekstowe6.getText(),color6);
+            } else{
+                ilosc_danych--;
+                usun_liczbe(pole_tekstowe6.getText());
 
-                }
+            }
+            if(frame2 != null){
+                frame2.revalidate();
+                frame2.repaint();
             }
         });
         frame.add(checkBox6);
 
         JCheckBox checkBox7 = new JCheckBox("Check");
         checkBox7.setBounds(100,200, 80,30);
-        checkBox7.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                if(checkBox7.isSelected()){
-                    System.out.println("Selected");
-                    dodaj_liczbe(pole_tekstowe7.getText());
-                    if(frame2 != null){
-                        frame2.revalidate();
-                        frame2.repaint();
-                    }
-                } else{
-                    System.out.println("Not Selected");
-                    usun_liczbe(pole_tekstowe7.getText());
-                    if(frame2 != null){
-                        frame2.revalidate();
-                        frame2.repaint();
-                    }
+        Color[] color7 = new Color[]{new Color(0, 250, 162)};
+        checkBox7.addItemListener(e -> {
+            if(checkBox7.isSelected()){
+                ilosc_danych++;
+                dodaj_liczbe(pole_tekstowe7.getText(),color7);
+            } else{
+                ilosc_danych--;
+                usun_liczbe(pole_tekstowe7.getText());
 
-                }
+            }
+            if(frame2 != null){
+                frame2.revalidate();
+                frame2.repaint();
             }
         });
         frame.add(checkBox7);
 
         JCheckBox checkBox8 = new JCheckBox("Check");
         checkBox8.setBounds(100,230, 80,30);
-        checkBox8.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                if(checkBox8.isSelected()){
-                    System.out.println("Selected");
-                    dodaj_liczbe(pole_tekstowe8.getText());
-                    if(frame2 != null){
-                        frame2.revalidate();
-                        frame2.repaint();
-                    }
-                } else{
-                    System.out.println("Not Selected");
-                    usun_liczbe(pole_tekstowe8.getText());
-                    if(frame2 != null){
-                        frame2.revalidate();
-                        frame2.repaint();
-                    }
+        Color[] color8 = new Color[]{new Color(76, 77, 70)};
+        checkBox8.addItemListener(e -> {
+            if(checkBox8.isSelected()){
+                ilosc_danych++;
+                dodaj_liczbe(pole_tekstowe8.getText(),color8);
+            } else{
+                ilosc_danych--;
+                usun_liczbe(pole_tekstowe8.getText());
 
-                }
+            }
+            if(frame2 != null){
+                frame2.revalidate();
+                frame2.repaint();
             }
         });
         frame.add(checkBox8);
 
         JCheckBox checkBox9 = new JCheckBox("Check");
         checkBox9.setBounds(100,260, 80,30);
-        checkBox9.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                if(checkBox9.isSelected()){
-                    System.out.println("Selected");
-                    dodaj_liczbe(pole_tekstowe9.getText());
-                    if(frame2 != null){
-                        frame2.revalidate();
-                        frame2.repaint();
-                    }
-                } else{
-                    System.out.println("Not Selected");
-                    usun_liczbe(pole_tekstowe9.getText());
-                    if(frame2 != null){
-                        frame2.revalidate();
-                        frame2.repaint();
-                    }
+        Color[] color9 = new Color[]{new Color(52, 4, 4)};
+        checkBox9.addItemListener(e -> {
+            if(checkBox9.isSelected()){
+                ilosc_danych++;
+                dodaj_liczbe(pole_tekstowe9.getText(),color9);
+            } else{
+                ilosc_danych--;
+                usun_liczbe(pole_tekstowe9.getText());
 
-                }
+            }
+            if(frame2 != null){
+                frame2.revalidate();
+                frame2.repaint();
             }
         });
         frame.add(checkBox9);
 
         JCheckBox checkBox10 = new JCheckBox("Check");
         checkBox10.setBounds(100,290, 80,30);
-        checkBox10.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                if(checkBox10.isSelected()){
-                    System.out.println("Selected");
-                    dodaj_liczbe(pole_tekstowe10.getText());
-                    if(frame2 != null){
-                        frame2.revalidate();
-                        frame2.repaint();
-                    }
-                } else{
-                    System.out.println("Not Selected");
-                    usun_liczbe(pole_tekstowe10.getText());
-                    if(frame2 != null){
-                        frame2.revalidate();
-                        frame2.repaint();
-                    }
+        Color[] color10 = new Color[]{new Color(255, 0, 233)};
+        checkBox10.addItemListener(e -> {
+            if(checkBox10.isSelected()){
+                ilosc_danych++;
 
-                }
+                dodaj_liczbe(pole_tekstowe10.getText(),color10);
+            } else{
+                ilosc_danych--;
+                usun_liczbe(pole_tekstowe10.getText());
+
+            }
+            if(frame2 != null){
+                frame2.revalidate();
+                frame2.repaint();
             }
         });
         frame.add(checkBox10);
@@ -315,28 +273,29 @@ public class gui extends JFrame {
 
         JButton wybierz_guzik = new JButton("wykres");
         wybierz_guzik.setBounds(300,100,90, 60);
-        wybierz_guzik.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                System.out.println("TEST");
-                thread = new Thread(() -> {
-                    frame2 = new SwingWrapper(chart).displayChart();
-                    javax.swing.SwingUtilities.invokeLater(() -> frame2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE));
-                });
-                thread.start();
+        wybierz_guzik.addActionListener(e -> {
+            if(ilosc_danych==0){
+                JOptionPane.showMessageDialog(null,"Brak danych do wykresu, zaznacz chociaż jedno pole","Błąd",JOptionPane.ERROR_MESSAGE);
+                return;
             }
+            thread = new Thread(() -> {
+                chart.getStyler().setSeriesColors(colors);
+                frame2 = new SwingWrapper(chart).displayChart();
+                SwingUtilities.invokeLater(() -> frame2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE));
+            });
+            thread.start();
         });
 
         JButton autor_guzik = new JButton("Autor");
         autor_guzik.setBounds(382,430,100, 30);
-        autor_guzik.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                JOptionPane.showMessageDialog(null,"Autor","Szymon Borzdyński",JOptionPane.PLAIN_MESSAGE);
-            }
-        });
+        autor_guzik.addActionListener(e -> JOptionPane.showMessageDialog(null,"Szymon Borzdyński","Autor",JOptionPane.PLAIN_MESSAGE));
+
 
         frame.add(wybierz_guzik);
         frame.add(autor_guzik);
         frame.setLayout(null);
         frame.setVisible(true);
     }
+
+
 }
